@@ -7,3 +7,5 @@
   tasks:
     - name: ping
       ping:
+    - name: debug
+      debug: msg={{ inventory_dir }}
