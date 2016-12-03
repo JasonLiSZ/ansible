@@ -34,3 +34,5 @@ TestResult.xml
 
 # Sysetm files
 .DS_Store
+
+# Ansible running files
