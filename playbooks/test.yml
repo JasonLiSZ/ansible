@@ -3,10 +3,11 @@
 # this is the test playbook, use > ansible-playbook ./playbooks/test.yml
 
 - name: test playbook
-  hosts: all
+  hosts: webservers
   tasks:
-    - name: ping
-      ping:
     - name: debug
-      debug: msg={{ ansible_os_family }}
+      debug: msg="{{ group_names }}, {{ ansible_processor_cores }}"
 
+    - name: create nginx config directory
+      file: path=/etc/nginx state=directory mode=0755
+      become: sudo

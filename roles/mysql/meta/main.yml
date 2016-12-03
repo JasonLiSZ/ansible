@@ -1,0 +1,8 @@
+---
+
+# introduction
+
+dependencies:
+  - role: firewall
+    firewall_allow_ports: 3306
+    #firewall_deny_ports: []
