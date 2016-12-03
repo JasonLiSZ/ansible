@@ -1,0 +1,8 @@
+---
+# install web server
+# prepare web environment
+# install database engineer
+
+- hosts: all
+  roles:
+    - { role: book_online, site_name: book_online }

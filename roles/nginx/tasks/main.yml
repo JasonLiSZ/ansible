@@ -1,0 +1,6 @@
+---
+
+# setup nginx
+
+- name: setup nginx server
+  debug: msg="{{ role_name }} is executing, on group {{ group_names }}, of server {{ ansible_default_ipv4.address }}"
