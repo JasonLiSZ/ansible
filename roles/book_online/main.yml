@@ -5,4 +5,4 @@
 
 - hosts: all
   roles:
-    - { role: book_online, site_name: book_online }
+    - { role: book_online, app_name: book_online }
