@@ -6,4 +6,4 @@
   debug: msg="{{ role_name }} is executing, on group {{ group_names }}, of server {{ ansible_default_ipv4.address }}"
 
 - name: print role execution info
-  debug: msg="db_user_name {{ db_user_name }}, db_password {{ db_password}}, db_schema {{ db_schema }}"
+  debug: msg="db_user_name {{ db_user_name }}, db_password {{ db_password }}, db_schema {{ db_schema }}"
