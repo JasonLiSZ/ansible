@@ -1,0 +1,9 @@
+---
+
+# this is the test playbook, use > ansible-playbook ./playbooks/test.yml
+
+- name: test playbook
+  hosts: all
+  tasks:
+    - name: ping
+      ping:
