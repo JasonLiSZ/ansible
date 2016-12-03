@@ -8,5 +8,5 @@ create: /private/etc/ansible
 chmod -R 777 /private/etc/ansible
 
 pwd
-mkdir -pv roles/{book_online,nginx,mysql,nodejs,docker,firewall}/{tasks,handlers,files,vars,templates,meta,default}
+mkdir -pv roles/{book_online,nginx,mysql,nodejs,docker,firewall}/{tasks,meta,defaults}
 tree

@@ -7,3 +7,4 @@
 
 - name: print role execution info
   debug: msg="firewall_allow_ports {{ firewall_allow_ports }}, firewall_deny_ports {{ firewall_deny_ports }}"
+
