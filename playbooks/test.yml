@@ -2,9 +2,13 @@
 
 # this is the test playbook, use > ansible-playbook ./playbooks/test.yml
 
-- name: test playbook
-  hosts: webservers
+- hosts: webservers
+  gather_facts: False
+
   tasks:
     - name: debug
-      debug: msg="{{ group_names }}, {{ ansible_processor_cores }}"
-
+      shell: cat /root/ansible
+      register: host
+      until: host.stdout.startswith("Master")
+      retries: 5
+      delay: 5
