@@ -1,0 +1,26 @@
+---
+
+# this is list the internal variables
+
+- hosts: webservers
+  tasks:
+    - name: groups
+      debug: msg="groups={{ groups }}"
+
+    - name: group_names
+      debug: msg="group_names={{ group_names }}"
+
+    - name: hostvars
+      debug: msg="hostvars={{ hostvars }}"
+
+    - name: inventory_hostname
+      debug: msg="inventory_hostname={{ inventory_hostname }}"
+
+    - name: inventory_hostname_short
+      debug: msg="inventory_hostname_short={{ inventory_hostname_short }}"
+
+    - name: play_hosts
+      debug: msg="play_hosts={{ play_hosts }}"
+
+    - name: inventory_dir
+      debug: msg="inventory_dir={{ inventory_dir }}"
