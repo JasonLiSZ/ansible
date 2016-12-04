@@ -1,0 +1,18 @@
+---
+
+# this is for the test of interactive
+
+- hosts: all
+  gather_facts: False
+  vars_prompt:
+    - name: "first_name"
+      prompte: "please input your first_name"
+      private: no
+
+    - name: "last_name"
+      prompte: "please input your last_name"
+      private: no
+
+  tasks:
+    - name: print full name
+      debug: msg="my name is {{ last_name }}.{{ first_name }}"

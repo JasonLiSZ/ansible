@@ -10,3 +10,18 @@ chmod -R 777 /private/etc/ansible
 pwd
 mkdir -pv roles/{book_online,nginx,mysql,nodejs,docker,firewall}/{tasks,meta,defaults}
 tree
+
+===============================
+execution
+===============================
+#check syntax for playbook
+bash-3.2$ ansible-playbook ./roles/book_online/main.yml --syntax-check
+
+#list task
+bash-3.2$ ansible-playbook ./roles/book_online/main.yml --list-task
+
+#list hosts
+bash-3.2$ ansible-playbook ./roles/book_online/main.yml --list-hosts
+
+#execution
+bash-3.2$ ansible-playbook ./roles/book_online/main.yml
