@@ -1,0 +1,13 @@
+---
+
+# this is the test for loop
+
+- hosts: all
+  gather_facts: False
+  tasks:
+    - name: do the loop
+      debug: msg="{{ item }} - {{ group_names }}"
+      with_items:
+        - one
+        - two
+      when: "'webservers' in group_names"

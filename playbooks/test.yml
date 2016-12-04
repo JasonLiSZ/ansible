@@ -8,6 +8,3 @@
     - name: debug
       debug: msg="{{ group_names }}, {{ ansible_processor_cores }}"
 
-    - name: create nginx config directory
-      file: path=/etc/nginx state=directory mode=0755
-      become: sudo
