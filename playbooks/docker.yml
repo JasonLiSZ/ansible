@@ -2,21 +2,23 @@
 
 # this is for the test of interactive
 
-- hosts: webservers
+- hosts: "{{ env }}@webservers"
   gather_facts: False
   tasks:
     - name: create docker container
       docker_container:
-        image: "ubuntu/nginx:v2"
+        image: "ubuntu/nginx"
         name:  "web01"
         state: started
         restart: yes
         interactive: yes
+        volumes:
+          /var/www/html:/var/www/html
         ports:
           - 8080:80
 
-    - name: rewrite index
-      command: docker exec web01 echo "hello Phoenix" > /var/www/html/index.html
+    #- name: rewrite index
+    #  command: docker cp "/var/www/html/index.html" "web01:/var/www/html/"
 
     - name: start nginx
       command: docker exec web01 nginx

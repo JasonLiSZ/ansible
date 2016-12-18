@@ -3,10 +3,10 @@
 # introduction
 
 - name: print general info
-  debug: msg="role {{ role_name }} will be executed, on group {{ group_names }}, of server {{ inventory_hostname }}"
+  debug: msg="[{{ role_name }}] will be executed, for group [{{ group_names }}], on [{{ inventory_hostname }}]"
 
 - name: print role execution info
-  debug: msg="site_name {{ site_name }}, site_port {{ site_port }}"
+  debug: msg="site_name [{{ site_name }}], site_port [{{ site_port }}]"
 
 - name: install nginx
   apt: name=nginx state=latest

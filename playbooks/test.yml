@@ -7,6 +7,8 @@
 
   tasks:
     - name: print general info
-      debug: msg="{{ group_names }}, {{ inventory_hostname }}"
+      debug: msg="{{ group_names }}
+                  , {{ inventory_hostname }}
+                  , aaa"
 
 

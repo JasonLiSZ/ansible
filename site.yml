@@ -11,4 +11,3 @@
 
   roles:
     - { role: nginx, site_name: "read_book", site_port: 8080 }
-
