@@ -1,1 +1,4 @@
-
+docker_container_expose_port: 80
+docker_host_port: 8080
+docker_volumes_source_directory: /var/www/html
+docker_volumes_target_directory: /var/www/html

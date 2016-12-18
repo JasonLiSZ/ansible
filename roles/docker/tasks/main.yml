@@ -8,9 +8,16 @@
 - name: print role execution info
   debug: msg="docker_image_name [{{ docker_image_name }}]
               , docker_container_name [{{ docker_container_name }}]
-              , docker_container_port_mapping [{{ docker_container_port_mapping }}]
-              , docker_copy_source_directory [{{ docker_copy_source_directory }}]
-              , docker_copy_target_directory [{{ docker_copy_target_directory }}]"
+              , docker_container_expose_port [{{ docker_container_expose_port }}]
+              , docker_host_port [{{ docker_host_port }}]
+              , docker_deploy_source_directory [{{ docker_deploy_source_directory }}]
+              , docker_volumes_source_directory [{{ docker_volumes_source_directory }}]
+              , docker_volumes_target_directory [{{ docker_volumes_target_directory }}]"
+
+- name: clear files from host
+  file:
+    path: "{{ docker_volumes_source_directory }}"
+    state: absent
 
 - name: create docker container
   docker_container:
@@ -19,11 +26,15 @@
     state: started
     restart: yes
     interactive: yes
+    volumes:
+      "{{ docker_volumes_source_directory }}:{{ docker_volumes_target_directory }}"
     ports:
-      - "{{ docker_container_port_mapping }}"
+      - "{{ docker_host_port }}:{{ docker_container_expose_port }}"
 
 - name: copy files to container
-  command: docker exec {{ docker_container_name }} echo "hello Phoenix" > /var/www/html/index.html
+  copy:
+    src: "{{ docker_deploy_source_directory }}"
+    dest: "{{ docker_volumes_source_directory }}"
 
 - name: start nginx
-  command: docker exec web01 nginx
+  command: docker exec {{ docker_container_name }} nginx
