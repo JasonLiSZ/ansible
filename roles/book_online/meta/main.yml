@@ -6,10 +6,10 @@ dependencies:
   - role: nginx
     site_name: "{{ app_name }}"
     site_port: 8080
-    when: "'webservers' in group_names"
+    when: "'{{ env }}@webservers' in group_names"
 
   - role: mysql
     db_user_name: root
     db_password: root123
     db_schema: "{{ app_name }}"
-    when: "'dbservers' in group_names"
+    when: "'{{ env }}@dbservers' in group_names"

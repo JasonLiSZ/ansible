@@ -2,15 +2,11 @@
 
 # this is the test playbook, use > ansible-playbook ./playbooks/test.yml
 
-- hosts: QA@webservers
+- hosts: all
   gather_facts: False
 
   tasks:
-    - name: Restart a container
-      docker_container:
-        name: "web01"
-        image: "ubuntu/nginx:v2"
-        state: started
-        restart: yes
-        ports:
-          - "8080:80"
+    - name: print general info
+      debug: msg="{{ group_names }}, {{ inventory_hostname }}"
+
+

@@ -1,0 +1,14 @@
+---
+
+# this is the root entry
+
+- hosts: "{{ env }}@webservers"
+  gather_facts: False
+
+  tasks:
+    - name: test
+      debug: msg="extra parameter {{ env }}"
+
+  roles:
+    - { role: nginx, site_name: "read_book", site_port: 8080 }
+
