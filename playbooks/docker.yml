@@ -1,0 +1,22 @@
+---
+
+# this is for the test of interactive
+
+- hosts: webservers
+  gather_facts: False
+  tasks:
+    - name: create docker container
+      docker_container:
+        image: "ubuntu/nginx:v2"
+        name:  "web01"
+        state: started
+        restart: yes
+        interactive: yes
+        ports:
+          - 8080:80
+
+    - name: rewrite index
+      command: docker exec web01 echo "hello Phoenix" > /var/www/html/index.html
+
+    - name: start nginx
+      command: docker exec web01 nginx
