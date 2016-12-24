@@ -2,7 +2,7 @@
 
 # this is the root entry
 
-- hosts: "{{ env }}@webservers"
+- hosts: all
   gather_facts: False
 
   tasks:
@@ -10,14 +10,4 @@
       debug: msg="extra parameter {{ env }}"
 
   roles:
-    #- { role: nginx
-    #    , site_name: "read_book"
-    #    , site_port: 8080 }
-    - { role: "docker"
-        , docker_image_name: "ubuntu/nginx"
-        , docker_container_name: "web01"
-        , docker_container_expose_port: 80
-        , docker_host_port: 8080
-        , docker_deploy_source_directory: "/Users/jason/temp/"
-        , docker_volumes_source_directory: "/var/www/html/"
-        , docker_volumes_target_directory: "/var/www/html/"}
+    - { role: book_online, release_package: "/Users/jason/temp/" }

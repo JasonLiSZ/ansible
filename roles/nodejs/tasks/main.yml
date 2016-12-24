@@ -1,0 +1,9 @@
+---
+
+# introduction
+
+
+- name: executed enviornment
+  debug: msg="extra parameter {{ ntp_server }}"
+
+

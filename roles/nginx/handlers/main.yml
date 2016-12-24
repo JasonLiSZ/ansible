@@ -3,4 +3,4 @@
 # introduction
 
 - name: restart nginx
-  service: name=nginx state=restarted
+  command: docker exec {{ web_box_name }} nginx

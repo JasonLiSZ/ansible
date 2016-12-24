@@ -2,6 +2,8 @@
 
 # introduction
 
+allow_duplicates: yes
+
 dependencies:
   - role: firewall
     firewall_allow_ports: 3306

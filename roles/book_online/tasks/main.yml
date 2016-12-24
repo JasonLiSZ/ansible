@@ -1,0 +1,9 @@
+---
+
+# introduction
+
+- name: print general info
+  debug: msg="[{{ role_name }}] will be executed, for group [{{ group_names }}], on [{{ inventory_hostname }}]"
+
+- name: print role execution info
+  debug: msg="release_package [{{ release_package }}]"

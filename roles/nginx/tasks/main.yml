@@ -6,17 +6,46 @@
   debug: msg="[{{ role_name }}] will be executed, for group [{{ group_names }}], on [{{ inventory_hostname }}]"
 
 - name: print role execution info
-  debug: msg="site_name [{{ site_name }}], site_port [{{ site_port }}]"
+  debug: msg="nginx_config_template [{{ nginx_config_template }}]
+              , web_box_name [{{ web_box_name }}]
+              , site_port [{{ site_port }}]
+              , docker_volumes_source_directory [{{ docker_volumes_source_directory }}]"
 
-- name: install nginx
-  apt: name=nginx state=latest
+- name: clear files from host
+  file:
+    path: "{{ docker_volumes_source_directory }}"
+    state: absent
+  when: is_load_balance != true
 
-- name: create nginx config directory
-  file: path=/etc/nginx owner={{ ansible_user }} group=root state=directory mode=0644
+- name: create temp directory
+  file:
+    path: "{{ docker_volumes_source_directory }}"
+    state: directory
+  when: is_load_balance != true
 
-- name: copy nginx.config
-  template: src=nginx.conf dest=/etc/nginx/nginx.conf owner={{ ansible_user }} group=root backup=yes mode=0644
-  notify: restart nginx
+- name: copy {{ nginx_config_template }} to host
+  template: src={{ nginx_config_template }} dest="{{ docker_volumes_source_directory }}/nginx.conf"
 
-- name: make sure nginx service running
-  service: name=nginx state=restarted
+- name: copy nginx.confg from host to box
+  command: docker cp {{ docker_volumes_source_directory }}/nginx.conf {{ web_box_name }}:/etc/nginx/nginx.conf
+
+- name: delete nginx conf from temp directory
+  file:
+    path: "{{ docker_volumes_source_directory }}/nginx.conf"
+    state: absent
+
+- name: deploy package to host
+  copy:
+    src: "{{ release_package }}"
+    dest: "{{ docker_volumes_source_directory }}"
+  when: is_load_balance != true
+
+- name: copy files to container
+  command: docker cp {{ docker_volumes_source_directory }}/. {{ web_box_name }}:/var/www/html/
+  when: is_load_balance != true
+
+- name: start nginx
+  command: docker exec {{ web_box_name }} nginx
+
+- name: nginx complete
+  debug: msg="------------ nginx [{{ web_box_name }}] create successfully ------------"
