@@ -13,6 +13,18 @@
               , docker_volumes_source_directory [{{ docker_volumes_source_directory }}]
               , release_package [{{ release_package }}]"
 
+- name: stop docker container
+  docker_container:
+    image: "{{ docker_image_name }}"
+    name:  "{{ docker_container_name }}"
+    state: stopped
+
+- name: obsolete container
+  docker_container:
+    image: "{{ docker_image_name }}"
+    name:  "{{ docker_container_name }}"
+    state: absent
+
 - name: create docker container
   docker_container:
     image: "{{ docker_image_name }}"
