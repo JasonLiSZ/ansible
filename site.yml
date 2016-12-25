@@ -2,7 +2,7 @@
 
 # this is the root entry
 
-- hosts: all
+- hosts: "{{ env }}@webservers"
   gather_facts: False
 
   tasks:
