@@ -1,0 +1,9 @@
+---
+
+# introduction
+
+- name: print general info
+  debug: msg="[{{ role_name }}] will be executed, for group [{{ group_names }}], on [{{ inventory_hostname }}]"
+
+- name: print role execution info
+  debug: msg="build_dir [{{ build_dir }}]"

@@ -2,7 +2,7 @@
 
 # this is the root entry
 
-- hosts: "{{ env }}@webservers"
+- hosts: "web@{{ env }}"
   gather_facts: False
 
   tasks:
@@ -10,4 +10,5 @@
       debug: msg="extra parameter {{ env }}"
 
   roles:
-    - { role: book_online, release_package: "/Users/jason/temp/" }
+    #- { role: book_online, release_package: "/Users/jason/temp/" }
+    - { role: mytest, build_dir: "{{build_dir}}" }
